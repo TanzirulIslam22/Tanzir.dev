@@ -16,7 +16,7 @@ const manrope = Manrope({
 
 export default function Base({ children }: { children: ReactNode }) {
   return (
-    <div className={`${syne.variable} ${manrope.variable}`}>
+    <div className={`bg-noise ${syne.variable} ${manrope.variable}`}>
       {children}
     </div>
   );
