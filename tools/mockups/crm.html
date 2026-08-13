@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #0b0a07;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    color: #e6e6e6;
+    display: flex; align-items: center; justify-content: center; padding: 30px;
+  }
+  .app { width: 1180px; display: grid; grid-template-columns: 200px 1fr; gap: 18px; }
+  .sidebar { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 20px 16px; display: flex; flex-direction: column; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; margin-bottom: 28px; }
+  .logo .mark { width: 10px; height: 10px; border-radius: 3px; background: #e9dcc8; }
+  .navitem { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: #8a8a8a; margin-bottom: 2px; }
+  .navitem.active { background: rgba(125,211,252,0.1); color: #e9dcc8; }
+  .navitem .ic { width: 14px; height: 14px; border-radius: 4px; background: #262626; }
+  .navitem.active .ic { background: #e9dcc8; }
+  .spacer { flex: 1; }
+  .sidebar .foot { margin-top: 24px; font-size: 11px; color: #555; }
+  .main { display: flex; flex-direction: column; gap: 16px; }
+  .topbar { display: flex; align-items: center; gap: 12px; background: #101010; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 18px; }
+  .topbar .crumb { font-size: 13px; color: #8a8a8a; margin-right: auto; }
+  .search { background: #0d0d0d; border: 1px solid #262626; border-radius: 8px; padding: 8px 14px; font-size: 12px; color: #666; width: 220px; }
+  .btn { background: #e9dcc8; color: #0b0a07; font-weight: 600; font-size: 12.5px; padding: 8px 16px; border-radius: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi { background: #101010; border: 1px solid #1f1f1f; border-radius: 14px; padding: 16px; }
+  .kpi .lbl { font-size: 11px; color: #666; }
+  .kpi .num { font-family: monospace; font-size: 26px; font-weight: 700; margin-top: 6px; }
+  .kpi .delta { font-size: 11px; margin-top: 6px; color: #8a8a8a; }
+  .kpi .delta b { color: #f2e9dc; }
+  .row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; }
+  .card { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 18px; }
+  .card .h { font-size: 12px; font-weight: 600; color: #9a9a9a; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+  .card .h .link { font-size: 11px; color: #e9dcc8; }
+  .revenue { position: relative; height: 170px; }
+  .grid-lines { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; }
+  .grid-lines i { border-top: 1px dashed #1c1c1c; }
+  .bars { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 12px; padding: 0 6px; }
+  .bars i { flex: 1; border-radius: 5px 5px 2px 2px; background: #1c1c1c; }
+  .bars i.on { background: linear-gradient(180deg, #e9dcc8, #1e5a7a); }
+  .bars i.hot { background: linear-gradient(180deg, #f2e9dc, #6f8f1d); }
+  .legend { display: flex; gap: 14px; margin-top: 10px; font-size: 11px; color: #8a8a8a; }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .table .r { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #191919; font-size: 12.5px; }
+  .table .r:last-child { border-bottom: none; }
+  .table .avatar { width: 26px; height: 26px; border-radius: 50%; background: #222; flex-shrink: 0; }
+  .table .name { color: #cfcfcf; }
+  .table .mail { color: #666; font-size: 11px; }
+  .table .val { margin-left: auto; font-family: monospace; color: #e6e6e6; }
+  .table .tag { font-size: 10.5px; border-radius: 5px; padding: 3px 8px; margin-left: 8px; }
+  .tag.hot { background: rgba(201,242,79,0.12); color: #f2e9dc; }
+  .tag.new { background: rgba(125,211,252,0.12); color: #e9dcc8; }
+  .row2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  .pipeline { display: flex; flex-direction: column; gap: 8px; }
+  .pl { display: flex; align-items: center; gap: 12px; font-size: 12.5px; }
+  .pl .lbl { width: 110px; color: #9a9a9a; }
+  .pl .trk { flex: 1; height: 8px; border-radius: 5px; background: #1a1a1a; overflow: hidden; }
+  .pl .trk i { display: block; height: 100%; background: #e9dcc8; border-radius: 5px; }
+  .pl .n { font-family: monospace; color: #cfcfcf; }
+  .ai { background: linear-gradient(135deg, rgba(125,211,252,0.06), transparent); border: 1px solid rgba(125,211,252,0.25); }
+  .ai .h { color: #e9dcc8; }
+  .ai p { font-size: 12.5px; line-height: 1.7; color: #bdbdbd; }
+  .ai .pill { display: inline-block; background: rgba(125,211,252,0.12); color: #e9dcc8; border-radius: 6px; padding: 3px 8px; font-size: 11px; margin-top: 10px; margin-right: 6px; }
+</style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo"><span class="mark"></span> LeadFlow</div>
+      <div class="navitem active"><span class="ic"></span> Dashboard</div>
+      <div class="navitem"><span class="ic"></span> Leads</div>
+      <div class="navitem"><span class="ic"></span> Customers</div>
+      <div class="navitem"><span class="ic"></span> Tasks</div>
+      <div class="navitem"><span class="ic"></span> Reports</div>
+      <div class="spacer"></div>
+      <div class="foot">Role: Admin · RBAC on</div>
+    </aside>
+    <div class="main">
+      <div class="topbar">
+        <span class="crumb">Dashboard / <b style="color:#cfcfcf">Overview</b></span>
+        <span class="search">Search leads, customers…</span>
+        <span class="btn">+ Add lead</span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="lbl">Active leads</div><div class="num" style="color:#e9dcc8">284</div><div class="delta"><b>+12%</b> vs last month</div></div>
+        <div class="kpi"><div class="lbl">Conversion rate</div><div class="num">18.4%</div><div class="delta"><b>+2.1%</b> vs last month</div></div>
+        <div class="kpi"><div class="lbl">Monthly revenue</div><div class="num">$12,480</div><div class="delta"><b>+8.7%</b> vs last month</div></div>
+        <div class="kpi"><div class="lbl">Tasks due today</div><div class="num">14</div><div class="delta">3 overdue</div></div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <div class="h">Revenue <span class="link">View report →</span></div>
+          <div class="revenue">
+            <div class="grid-lines"><i></i><i></i><i></i><i></i></div>
+            <div class="bars">
+              <i style="height:30%"></i><i class="on" style="height:48%"></i><i style="height:38%"></i>
+              <i class="on" style="height:62%"></i><i style="height:50%"></i><i class="hot" style="height:78%"></i>
+              <i class="on" style="height:58%"></i><i style="height:44%"></i><i class="hot" style="height:90%"></i>
+              <i style="height:52%"></i><i class="on" style="height:70%"></i><i class="hot" style="height:100%"></i>
+            </div>
+          </div>
+          <div class="legend"><span><i style="background:#e9dcc8"></i>This year</span><span><i style="background:#f2e9dc"></i>Quota</span></div>
+        </div>
+        <div class="card table">
+          <div class="h">Recent leads <span class="link">View all →</span></div>
+          <div class="r"><span class="avatar"></span><span><div class="name">Sarah Khan</div><div class="mail">sarah@brightlabs.io</div></span><span class="val">$4,200</span><span class="tag hot">Hot</span></div>
+          <div class="r"><span class="avatar"></span><span><div class="name">Daniel Mora</div><div class="mail">daniel@novamail.com</div></span><span class="val">$1,900</span><span class="tag new">New</span></div>
+          <div class="r"><span class="avatar"></span><span><div class="name">Ayesha Rana</div><div class="mail">ayesha@cartio.app</div></span><span class="val">$7,600</span><span class="tag hot">Hot</span></div>
+          <div class="r"><span class="avatar"></span><span><div class="name">Tom Becker</div><div class="mail">tom@gridline.co</div></span><span class="val">$950</span></div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="card pipeline">
+          <div class="h">Pipeline</div>
+          <div class="pl"><span class="lbl">New</span><span class="trk"><i style="width:100%"></i></span><span class="n">62</span></div>
+          <div class="pl"><span class="lbl">Contacted</span><span class="trk"><i style="width:74%"></i></span><span class="n">46</span></div>
+          <div class="pl"><span class="lbl">Qualified</span><span class="trk"><i style="width:52%"></i></span><span class="n">32</span></div>
+          <div class="pl"><span class="lbl">Proposal</span><span class="trk"><i style="width:31%"></i></span><span class="n">19</span></div>
+          <div class="pl"><span class="lbl">Won</span><span class="trk"><i style="width:18%"></i></span><span class="n">11</span></div>
+        </div>
+        <div class="card ai">
+          <div class="h">✦ AI Lead Analysis</div>
+          <p>Leads from <b style="color:#e6e6e6">SaaS and fintech</b> are converting <b style="color:#f2e9dc">2.3×</b> better this month. Prioritize follow-ups before 5pm local time and add a demo link to the first email.</p>
+          <span class="pill">Auto-tag: SaaS</span><span class="pill">Priority: High</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
