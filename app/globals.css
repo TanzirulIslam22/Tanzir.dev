@@ -35,11 +35,6 @@
   color: transparent;
 }
 
-.text-outline-accent {
-  -webkit-text-stroke: 1px rgba(242, 233, 220, 0.7);
-  color: transparent;
-}
-
 .bg-grid {
   background-image:
     linear-gradient(to right, rgba(242, 233, 220, 0.04) 1px, transparent 1px),
