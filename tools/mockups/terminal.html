@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(120% 120% at 20% 0%, #141414 0%, #0a0a0a 55%, #050505 100%);
+    font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px;
+  }
+  .terminal {
+    width: 920px;
+    background: #0b0b0b;
+    border-radius: 16px;
+    border: 1px solid #262626;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,242,79,0.05);
+    overflow: hidden;
+  }
+  .titlebar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 18px;
+    background: #101010;
+    border-bottom: 1px solid #1f1f1f;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .d1 { background: #ff5f57; } .d2 { background: #febc2e; } .d3 { background: #28c840; }
+  .title { margin-left: 10px; font-size: 13px; color: #555; }
+  .title b { color: #8a8a8a; font-weight: 500; }
+  .body { padding: 30px 28px 34px; font-size: 16px; line-height: 1.75; }
+  .p { display: flex; gap: 12px; margin-bottom: 4px; }
+  .prompt { color: #f2e9dc; }
+  .prompt .pwd { color: #8a8a8a; }
+  .cmd { color: #e6e6e6; }
+  .out { color: #a9a9a9; }
+  .key { color: #7dd3fc; }
+  .val { color: #f2e9dc; }
+  .str { color: #f6c177; }
+  .muted { color: #555; }
+  .cursor {
+    display: inline-block; width: 9px; height: 20px;
+    background: #f2e9dc; vertical-align: text-bottom;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="titlebar">
+      <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+      <span class="title"><b>tanzir</b> — zsh — 96×28</span>
+    </div>
+    <div class="body">
+      <div class="p"><span class="prompt">$</span><span class="cmd"> whoami</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;tanzirul islam — full-stack developer</span></div>
+      <div class="p"><span class="prompt">$</span><span class="cmd"> cat stack.json</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;{</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"frontend"</span>: <span class="str">"React / Next.js"</span>,</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"backend"</span>: <span class="str">"Node.js / Express"</span>,</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"database"</span>: <span class="str">"MongoDB / PostgreSQL"</span>,</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"ai"</span>: <span class="str">"OpenAI · RAG · Agents"</span></span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;}</span></div>
+      <div class="p"><span class="prompt">$</span><span class="cmd"> npx build --stack mern</span></div>
+      <div class="p"><span class="out">&nbsp;&nbsp;&nbsp;✔ production build ready <span class="muted">in 4.2s</span></span></div>
+      <div class="p"><span class="prompt">$</span><span class="cmd"> ship --premium <span class="muted">&lt;loading your idea&gt;</span></span><span class="cursor"></span></div>
+    </div>
+  </div>
+</body>
+</html>
