@@ -5,7 +5,7 @@ export default function Marquee() {
     <>
       {words.map((word) => (
         <span key={word} className="mx-6 flex items-center gap-6 md:mx-10 md:gap-10">
-          <span className="whitespace-nowrap text-2xl font-light tracking-tight text-white/70 md:text-3xl">
+          <span className="whitespace-nowrap text-2xl font-light tracking-tight text-accent/70 md:text-3xl">
             {word}
           </span>
           <span className="text-accent">*</span>
