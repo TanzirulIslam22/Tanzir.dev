@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 import { miniProjects } from "@/lib/data";
-import { SectionHeading } from "@/components/SectionHeading";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function Experiments() {
   return (

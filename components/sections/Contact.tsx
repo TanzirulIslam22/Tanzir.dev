@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 
 import { profile } from "@/lib/data";
-import { SectionHeading } from "@/components/SectionHeading";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export default function Contact() {
   return (
@@ -27,18 +28,14 @@ export default function Contact() {
             <span className="text-outline">together.</span>
           </motion.h2>
 
-          <motion.a
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+          <MagneticButton
             href={`mailto:${profile.email}`}
             className="group mt-12 inline-flex items-center gap-3 rounded-full bg-accent px-8 py-4 text-sm font-semibold text-bg transition-transform hover:scale-[1.03]"
           >
             <Mail className="h-4 w-4" />
             {profile.email}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </motion.a>
+          </MagneticButton>
 
           <div className="mt-10 flex items-center gap-6">
             <a

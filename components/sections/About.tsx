@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 import { profile } from "@/lib/data";
-import { SectionHeading } from "@/components/SectionHeading";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function About() {
   return (

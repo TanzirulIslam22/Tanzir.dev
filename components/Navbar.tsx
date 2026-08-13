@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { profile } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 const links = [
   { href: "#about", label: "About" },
@@ -14,7 +15,7 @@ const links = [
   { href: "#services", label: "Services" },
 ];
 
-export default function Navbar() {
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -60,12 +61,12 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <a
+          <MagneticButton
             href="#contact"
             className="rounded-full border border-accent/20 px-5 py-2 text-sm text-accent transition-all hover:border-accent hover:bg-accent hover:text-bg"
           >
             Let&apos;s talk
-          </a>
+          </MagneticButton>
         </nav>
 
         <button
@@ -110,13 +111,13 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <a
+          <MagneticButton
             href="#contact"
             onClick={() => setOpen(false)}
             className="mt-6 inline-flex w-fit items-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-bg"
           >
             Let&apos;s talk
-          </a>
+          </MagneticButton>
         </nav>
       )}
     </header>

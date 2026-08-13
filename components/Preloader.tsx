@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const NAME = "TANZIRUL ISLAM";
 
-export default function Preloader() {
+export function Preloader() {
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
 

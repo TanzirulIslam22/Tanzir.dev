@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { heroWords, profile, stats } from "@/lib/data";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 const maskLines = ["Building", "AI-powered", "web experiences"];
 
@@ -84,20 +85,20 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 1.1 }}
             className="mt-12 flex flex-wrap items-center gap-4"
           >
-            <a
+            <MagneticButton
               href="#contact"
               className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-bg transition-transform hover:scale-[1.03]"
             >
               Let&apos;s work together
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-            <a
+            </MagneticButton>
+            <MagneticButton
               href={profile.resume}
               className="group inline-flex items-center gap-2 rounded-full border border-accent/25 px-7 py-3.5 text-sm font-medium text-accent transition-colors hover:border-accent"
             >
               Download resume
               <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-            </a>
+            </MagneticButton>
           </motion.div>
 
           <motion.div

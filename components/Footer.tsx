@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 import { profile } from "@/lib/data";
 
-export default function Footer() {
+export function Footer() {
   const nameLine = (
     <span className="flex items-center">
       <span className="font-display text-[9vw] leading-none tracking-tight text-transparent md:text-[7vw]" style={{ WebkitTextStroke: "1px rgba(242,233,220,0.18)" }}>

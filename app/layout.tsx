@@ -1,16 +1,29 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
+import { Syne, Manrope } from "next/font/google";
 import "./globals.css";
-import Base from "@/app/base";
-import { profile } from "@/lib/data";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { Preloader } from "@/components/Preloader";
+import { Cursor } from "@/components/Cursor";
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tanzirul-islam.vercel.app"),
-  title: {
-    default: `${profile.fullName} — MERN + AI Full-Stack Developer`,
-    template: "%s — Tanzirul Islam",
-  },
+  title: "Tanzirul Islam — MERN + AI Full-Stack Developer",
   description:
-    "I'm Tanzirul Islam, a full-stack developer building AI-powered, interactive web experiences on the MERN stack — React, Next.js, Node.js, MongoDB and AI integration.",
+    "Full-Stack Developer building AI-powered, interactive web experiences on the MERN stack. React, Next.js, Node.js, MongoDB and AI integration.",
   keywords: [
     "Tanzirul Islam",
     "Tanzir",
@@ -20,37 +33,26 @@ export const metadata: Metadata = {
     "React developer",
     "Bangladesh",
   ],
-  authors: [{ name: profile.fullName }],
-  creator: profile.fullName,
   openGraph: {
-    title: `${profile.fullName} — MERN + AI Full-Stack Developer`,
+    title: "Tanzirul Islam — MERN + AI Full-Stack Developer",
     description:
       "I build AI-powered, interactive web experiences with the MERN stack and AI integration.",
     type: "website",
-    locale: "en_US",
-    url: "https://tanzirul-islam.vercel.app",
-    siteName: "Tanzirul Islam",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: `${profile.fullName} — MERN + AI Full-Stack Developer`,
-    description:
-      "I build AI-powered, interactive web experiences with the MERN stack and AI integration.",
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: "#0b0a07",
-  colorScheme: "dark",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body>
-        <Base>{children}</Base>
+    <html lang="en" className={`${syne.variable} ${manrope.variable}`}>
+      <body className="bg-noise bg-bg">
+        <Preloader />
+        <Cursor />
+        <ScrollProgress />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
