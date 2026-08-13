@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tanzirul-islam.vercel.app/sitemap.xml
