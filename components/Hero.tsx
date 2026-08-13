@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { heroWords, profile, stats } from "@/lib/data";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Terminal } from "@/components/Terminal";
 
 const maskLines = ["Building", "AI-powered", "web experiences"];
 
@@ -126,24 +126,7 @@ export default function Hero() {
             className="relative w-full max-w-md"
           >
             <div className="absolute -inset-4 rounded-[2rem] bg-accent/20 blur-2xl" />
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-2xl">
-              <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-                <span className="ml-3 font-mono text-xs text-muted">
-                  tanzir.dev — bash
-                </span>
-              </div>
-              <Image
-                src={profile.heroImage}
-                alt="Terminal portfolio screenshot"
-                width={1000}
-                height={560}
-                priority
-                className="aspect-[16/9] w-full object-cover"
-              />
-            </div>
+            <Terminal />
           </motion.div>
         </div>
       </div>
