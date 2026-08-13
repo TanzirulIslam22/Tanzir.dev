@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #0b0a07;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    color: #e6e6e6;
+    display: flex; align-items: center; justify-content: center; padding: 30px;
+  }
+  .app { width: 1180px; display: grid; grid-template-columns: 200px 1fr; gap: 18px; }
+  /* Sidebar */
+  .sidebar { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 20px 16px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; margin-bottom: 28px; }
+  .logo .mark { width: 10px; height: 10px; border-radius: 3px; background: #f2e9dc; }
+  .navitem { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: #8a8a8a; margin-bottom: 2px; }
+  .navitem.active { background: rgba(201,242,79,0.1); color: #f2e9dc; }
+  .navitem .ic { width: 14px; height: 14px; border-radius: 4px; background: #262626; }
+  .navitem.active .ic { background: #f2e9dc; }
+  .spacer { flex: 1; }
+  .sidebar .foot { margin-top: 24px; font-size: 11px; color: #555; }
+  /* Main */
+  .main { display: flex; flex-direction: column; gap: 16px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; background: #101010; border: 1px solid #1f1f1f; border-radius: 12px; padding: 12px 18px; }
+  .topbar .crumb { font-size: 13px; color: #8a8a8a; }
+  .topbar .btn { background: #f2e9dc; color: #0b0a07; font-weight: 600; font-size: 12.5px; padding: 8px 16px; border-radius: 8px; }
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; }
+  /* Chat card */
+  .chat { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 20px; }
+  .chat .h { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #f2e9dc; margin-bottom: 16px; }
+  .chat .h .dot { width: 8px; height: 8px; border-radius: 50%; background: #f2e9dc; }
+  .bubble { border-radius: 12px; padding: 12px 14px; font-size: 12.5px; line-height: 1.6; margin-bottom: 10px; }
+  .b-user { background: #171717; color: #cfcfcf; margin-left: 40px; }
+  .b-ai { background: #161616; border: 1px solid #222; color: #bdbdbd; }
+  .b-ai .tag { display: inline-block; background: rgba(201,242,79,0.12); color: #f2e9dc; border-radius: 5px; font-size: 10px; padding: 2px 7px; margin-right: 6px; }
+  .b-ai .src { color: #6b6b6b; font-size: 11px; margin-top: 6px; }
+  .b-ai .src b { color: #9a9a9a; font-weight: 500; }
+  .input { display: flex; align-items: center; gap: 10px; background: #0d0d0d; border: 1px solid #262626; border-radius: 10px; padding: 11px 14px; margin-top: 4px; }
+  .input .txt { flex: 1; font-size: 12.5px; color: #666; }
+  .input .send { width: 30px; height: 30px; border-radius: 8px; background: #f2e9dc; display: flex; align-items: center; justify-content: center; }
+  .input .send::before { content: ""; width: 0; height: 0; border-left: 7px solid #0b0a07; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
+  /* Right column */
+  .stat { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 16px; }
+  .stat .lbl { font-size: 11px; color: #666; margin-bottom: 4px; }
+  .stat .num { font-family: monospace; font-size: 30px; font-weight: 700; color: #fff; }
+  .stat .num em { color: #f2e9dc; font-style: normal; }
+  .stat .bar { height: 6px; background: #1d1d1d; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+  .stat .bar i { display: block; height: 100%; background: #f2e9dc; border-radius: 4px; }
+  .docs { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 16px; }
+  .docs .h { font-size: 12px; font-weight: 600; color: #9a9a9a; margin-bottom: 12px; }
+  .doc { display: flex; align-items: center; gap: 10px; background: #151515; border: 1px solid #222; border-radius: 9px; padding: 9px 12px; font-size: 12px; color: #bdbdbd; margin-bottom: 8px; }
+  .doc .f { width: 14px; height: 16px; border-radius: 3px; background: #f2e9dc; opacity: 0.9; }
+  .doc .ck { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: rgba(201,242,79,0.2); color: #f2e9dc; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+  .chart { background: #101010; border: 1px solid #1f1f1f; border-radius: 16px; padding: 16px; }
+  .chart .h { font-size: 12px; font-weight: 600; color: #9a9a9a; margin-bottom: 12px; }
+  .bars { display: flex; align-items: flex-end; gap: 12px; height: 90px; padding-top: 6px; }
+  .bars i { width: 26px; border-radius: 5px 5px 2px 2px; background: #1e1e1e; }
+  .bars i.on { background: linear-gradient(180deg, #f2e9dc, #7a9b1f); }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 16px; }
+</style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo"><span class="mark"></span> SupportAI</div>
+      <div class="navitem active"><span class="ic"></span> Conversations</div>
+      <div class="navitem"><span class="ic"></span> Knowledge base</div>
+      <div class="navitem"><span class="ic"></span> Analytics</div>
+      <div class="navitem"><span class="ic"></span> Team</div>
+      <div class="navitem"><span class="ic"></span> Settings</div>
+      <div class="spacer" style="flex:1"></div>
+      <div class="foot">v2.4 · RAG engine online</div>
+    </aside>
+    <div class="main">
+      <div class="topbar">
+        <span class="crumb">workspace / <b style="color:#cfcfcf">acme-support</b></span>
+        <span class="btn">+ New conversation</span>
+      </div>
+      <div class="grid">
+        <div class="chat">
+          <div class="h"><span class="dot"></span> AI Support Agent — live</div>
+          <div class="bubble b-user">How do I reset my workspace password?</div>
+          <div class="bubble b-ai">
+            <span class="tag">AI</span> You can reset it from <b>Settings → Security</b> then choose
+            “Reset password”. We'll email you a secure link valid for 15 minutes.
+            <div class="src">Sources: <b>1 · settings/security.md</b> <b>2 · faq/accounts.md</b></div>
+          </div>
+          <div class="bubble b-ai">
+            <span class="tag">AI</span> Want me to walk you through enabling two-factor auth while you're there?
+          </div>
+          <div class="input"><span class="txt">Type your question…</span><span class="send"></span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="stat">
+            <div class="lbl">Resolved automatically</div>
+            <div class="num"><em>87</em>%</div>
+            <div class="bar"><i style="width:87%"></i></div>
+          </div>
+          <div class="stat">
+            <div class="lbl">Avg. response time</div>
+            <div class="num"><em>1.4</em>s</div>
+            <div class="bar"><i style="width:24%"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="row3">
+        <div class="docs">
+          <div class="h">Knowledge base</div>
+          <div class="doc"><span class="f"></span> product-guide.pdf <span class="ck">✓</span></div>
+          <div class="doc"><span class="f"></span> billing-faq.md <span class="ck">✓</span></div>
+          <div class="doc"><span class="f"></span> api-docs.pdf <span class="ck">✓</span></div>
+        </div>
+        <div class="chart">
+          <div class="h">Tickets this week</div>
+          <div class="bars">
+            <i style="height:35%"></i><i class="on" style="height:60%"></i><i style="height:45%"></i>
+            <i class="on" style="height:80%"></i><i style="height:55%"></i><i class="on" style="height:95%"></i><i style="height:40%"></i>
+          </div>
+        </div>
+        <div class="stat" style="background:#0d0d0d;border-color:#2b2b2b">
+          <div class="lbl" style="color:#f2e9dc">AI Insight</div>
+          <div style="font-size:12.5px;color:#bdbdbd;line-height:1.6;margin-top:8px">
+            Most questions are about billing and password reset. Add one FAQ entry and you could cut
+            <b style="color:#f2e9dc">~34%</b> of inbound tickets.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
