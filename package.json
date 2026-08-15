@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "deploy:pages": "next build && npx wrangler pages deploy out --project-name tanzirul-islam"
   },
   "dependencies": {
     "framer-motion": "^12.5.0",

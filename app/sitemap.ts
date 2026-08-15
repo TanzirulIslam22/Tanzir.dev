@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://tanzirul-islam.vercel.app";
+export const dynamic = "force-static";
+
+const BASE_URL = "https://tanzirul-islam.pages.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
