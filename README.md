@@ -13,14 +13,13 @@
 </p>
 
 <p align="center">
-  <a href="https://tanzirul-islam.pages.dev"><b>🌐 Live (Cloudflare Pages)</b></a> ·
-  <a href="https://tanzirul-islam.vercel.app">Mirror (Vercel)</a> ·
+  <a href="https://tanzirul-islam.pages.dev"><b>🌐 Live demo</b></a> ·
   <a href="https://github.com/TanzirulIslam22/">GitHub</a> ·
   <a href="https://www.linkedin.com/in/tanzirulislam22/">LinkedIn</a> ·
   <a href="public/resume.pdf">Resume</a>
 </p>
 
-> **Why two links?** The site is hosted on **both Cloudflare Pages and Vercel**. Vercel's `*.vercel.app` domain is blocked by some ISPs (e.g. in Bangladesh), so the Cloudflare Pages URL is the primary, always-accessible link. Both serve identical content — use whichever opens in your network.
+> **Why two links?** The site is hosted on **both Cloudflare Pages and Vercel**. Vercel's `*.vercel.app` domain is blocked by some ISPs (e.g. in Bangladesh), so the Cloudflare Pages URL above is the primary, always-accessible link. Both serve identical content — if you ever can't open the Cloudflare link from your network, the Vercel mirror (`https://tanzirul-islam.vercel.app`) will work.
 
 <p align="center">
   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js&logoColor=white" />
@@ -29,7 +28,6 @@
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
   <img alt="Framer Motion" src="https://img.shields.io/badge/Framer_Motion-12-0055FF?style=flat-square&logo=framer&logoColor=white" />
   <img alt="Cloudflare Pages" src="https://img.shields.io/badge/Deployed_on-Cloudflare_Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white" />
-  <img alt="Vercel" src="https://img.shields.io/badge/Mirror-Vercel-black?style=flat-square&logo=vercel&logoColor=white" />
   <img alt="License" src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
 </p>
 
